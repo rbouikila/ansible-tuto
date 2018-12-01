@@ -1,16 +1,11 @@
 ---
-- name: Updates apt cache
-  apt:
-    update_cache: true
-
 - name: Installs necessary packages
   apt:
-    pkg: "{{ item }}"
+    pkg: ["apache2", "libapache2-mod-php", "git"]
     state: latest
-  with_items:
-    - apache2
-    - libapache2-mod-php5
-    - git
+    update_cache: true
+  tags:
+    - apache
 
 - name: Push future default virtual host configuration
   copy:
@@ -24,7 +19,7 @@
 - name: Check that our config is valid
   command: apache2ctl configtest
   register: result
-  ignore_errors: True
+  ignore_errors: true
 
 - name: Rolling back - Restoring old default virtualhost
   command: a2ensite 000-default
@@ -52,4 +47,3 @@
   command: a2dissite default-ssl
   notify:
     - restart apache
-

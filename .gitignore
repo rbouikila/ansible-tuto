@@ -1,6 +1,7 @@
 .tags
 .vagrant
-test/step-*.log
+test/*.log
+test/*.log.test
 
 _book/
 node_modules/
@@ -8,3 +9,4 @@ node_modules/
 
 *.retry
 package-lock.json
+ubuntu-*-console.log

@@ -1,5 +1,4 @@
-Ansible tutorial
-================
+# Ansible tutorial
 
 This tutorial presents Ansible step-by-step. You'll need to have a (virtual or
 physical) machine to act as an Ansible node. A Vagrant environment is provided for 
@@ -21,21 +20,83 @@ accessible 'master' to be able to configure remote nodes: it's the nodes
 that need to be accessible (we'll see later that 'hidden' nodes can pull their
 configuration too!), and most of the time they are.
 
-# Prerequisites for Ansible
-
-You need the following python modules on your machine (the machine you run ansible 
-on) 
-- python-yaml
-- python-jinja2
-
-On Debian/Ubuntu run:
-``sudo apt-get install python-yaml python-jinja2 python-paramiko python-crypto``
+This tutorial has been tested with **Ansible 2.7.1**.
 
 We're also assuming you have a keypair in your ~/.ssh directory.
 
-# Installing Ansible
+## Quick start
 
-## From source
+- install Vagrant if you don't have it
+- install ansible (preferably 2.7.1 and using pip+virtualenv)
+- `vagrant up`
+- goto [step-00](./step-00/README.md)
+
+## Complete explanations
+
+### Installing Ansible
+
+The reference is the [installation
+guide](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html),
+but I strongly recomment the [Using pip & virtualenv (higly recommended
+!)](#using-pip--virtualenv-higly-recommended-) method.
+
+#### Using pip & virtualenv (higly recommended !)
+
+The best way to install Ansible (by far) is to use `pip` andf virtual
+environments.
+
+Using virtualenv will let you have multiple Ansible versions
+installed side by side, and test upgrades or use different versions in
+different projects. Also, by using a virtualenv, you won't pollute your
+system's python installation.
+
+Check
+[virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/)
+for this. It makes managing virtualenvs very easy.
+
+Under Ubuntu, installing virtualenv & virtualenvwrapper can be done like
+so:
+
+```bash
+sudo apt-get install python-virtualenv virtualenvwrapper python-pip
+exec $SHELL
+```
+
+You can then create a virtualenv:
+
+```bash
+mkvirtualenv ansible-tuto
+workon ansible-tuto
+```
+
+(`mkvirtualenv` usually switches you automatically to your newly created
+virtualenv, so here `workon ansible-tuto` is not strictly necessary, but
+lets be safe).
+
+Then, install ansible via `pip`:
+
+```bash
+pip install ansible==2.7.1
+```
+
+(or use whatever version you want).
+
+When you're done, you can deactivate your virtualenv to return to your
+system's python settings & modules:
+
+```bash
+deactivate
+```
+
+If you later want to return to your virtualenv:
+
+```bash
+workon ansible-tuto
+```
+
+Use `lsvirtualenv` to list all your virtual environments.
+
+#### From source (if you want to hack on ansible source code)
 
 Ansible devel branch is always usable, so we'll run straight from a git checkout.
 You might need to install git for this (`sudo apt-get install git` on Debian/Ubuntu).
@@ -51,36 +112,42 @@ At this point, we can load the Ansible environment:
 source ./hacking/env-setup
 ```
 
-## From a deb package
-
-When running from an installed package, this is absolutely not necessary. If
-you prefer running from a Debian package Ansible, provides a `make target` to
-build it. You need a few packages to build the deb:
+#### From a distribution package (discouraged)
 
 ```bash
-sudo apt-get install make fakeroot cdbs python-support
+sudo apt-get install ansible
+```
+
+#### From a built deb package (discouraged)
+
+When running from an distribution package, this is absolutely not
+necessary. If you prefer running from an up to date Debian package,
+Ansible provides a `make target` to build it. You need a few packages to
+build the deb and
+few dependencies:
+
+```bash
+sudo apt-get install make fakeroot cdbs python-support python-yaml python-jinja2 python-paramiko python-crypto python-pip
 git clone git://github.com/ansible/ansible.git
 cd ./ansible
 make deb
-sudo dpkg -i ../ansible_1.1_all.deb (version may vary)
+sudo dpkg -i ../ansible_x.y_all.deb (version may vary)
 ```
 
-We'll assume you're using the deb packages in the rest of this tutorial.
-
-# Cloning the tutorial
+### Cloning the tutorial
 
 ```bash
 git clone https://github.com/leucos/ansible-tuto.git
 cd ansible-tuto
 ```
 
-# Running the tutorials interactively with Docker
+### Running the tutorials interactively with Docker
 
 You can run the tutorials here interactively including a very simple setup with docker.
 
 Check [this repository](https://github.com/turkenh/ansible-interactive-tutorial) for details.
 
-# Using Vagrant with the tutorial
+### Using Vagrant with the tutorial
 
 It's highly recommended to use Vagrant to follow this tutorial. If you don't have 
 it already, setting up should be quite easy and is described in [step-00/README.md](https://github.com/leucos/ansible-tuto/tree/master/step-00/README.md).
@@ -121,7 +188,7 @@ Just in case you want to skip to a specific step, here is a topic table of conte
 - [10. Templates](https://github.com/leucos/ansible-tuto/tree/master/step-10)
 - [11. Variables again](https://github.com/leucos/ansible-tuto/tree/master/step-11)
 - [12. Migrating to roles](https://github.com/leucos/ansible-tuto/tree/master/step-12)
-- [13. Using tags](https://github.com/leucos/ansible-tuto/tree/master/step-13)
+- [13. Using tags (TBD)](https://github.com/leucos/ansible-tuto/tree/master/step-13)
 - [14. Roles dependencies (TBD)](https://github.com/leucos/ansible-tuto/tree/master/step-14)
 - [15. Debugging (TBD)](https://github.com/leucos/ansible-tuto/tree/master/step-15)
 - [99. The end](https://github.com/leucos/ansible-tuto/tree/master/step-99)
@@ -135,6 +202,7 @@ Thanks to all people who have contributed to this tutorial:
 * [Alice Ferrazzi](https://github.com/aliceinwire)
 * [Alice Pote](https://github.com/aliceriot)
 * [Amit Jakubowicz](https://github.com/amitit)
+* [Anonymous Contributor](https://github.com/terroirman)
 * [Arbab Nazar](https://github.com/arbabnazar)
 * [Atilla Mas](https://github.com/atillamas)
 * [Ben Visser](https://github.com/noqcks)
@@ -192,4 +260,3 @@ For typos, grammar, etc... please send a PR for the master branch
 directly.
 
 Thank you!
-
