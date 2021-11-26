@@ -5,12 +5,12 @@ physical) machine to act as an Ansible node. A Vagrant environment is provided f
 going through this tutorial.
 
 Ansible is a configuration management software that lets you control and
-configure nodes from  another machine. What makes it different from other
-management software is that Ansible  uses (potentially existing) SSH
+configure nodes from another machine. What makes it different from other
+management software is that Ansible uses (potentially existing) SSH
 infrastructure, while others (Chef, Puppet, ...) need a specific PKI
 infrastructure to be set up.
 
-Ansible also emphasises push mode, where configuration is pushed from a master
+Ansible also emphasizes push mode, where configuration is pushed from a master
 machine (a master machine is only a machine where you can SSH to nodes from) to
 nodes, while most other CM typically do it the other way around (nodes pull
 their config at times from a master machine).
@@ -20,14 +20,14 @@ accessible 'master' to be able to configure remote nodes: it's the nodes
 that need to be accessible (we'll see later that 'hidden' nodes can pull their
 configuration too!), and most of the time they are.
 
-This tutorial has been tested with **Ansible 2.7.1**.
+This tutorial has been tested with **Ansible 2.9**.
 
 We're also assuming you have a keypair in your ~/.ssh directory.
 
 ## Quick start
 
 - install Vagrant if you don't have it
-- install ansible (preferably 2.7.1 and using pip+virtualenv)
+- install ansible (preferably 2.10.5+ and using pip+virtualenv)
 - `vagrant up`
 - goto [step-00](./step-00/README.md)
 
@@ -37,12 +37,12 @@ We're also assuming you have a keypair in your ~/.ssh directory.
 
 The reference is the [installation
 guide](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html),
-but I strongly recomment the [Using pip & virtualenv (higly recommended
+but I strongly recommend the [Using pip & virtualenv (higly recommended
 !)](#using-pip--virtualenv-higly-recommended-) method.
 
 #### Using pip & virtualenv (higly recommended !)
 
-The best way to install Ansible (by far) is to use `pip` andf virtual
+The best way to install Ansible (by far) is to use `pip` and virtual
 environments.
 
 Using virtualenv will let you have multiple Ansible versions
@@ -58,7 +58,7 @@ Under Ubuntu, installing virtualenv & virtualenvwrapper can be done like
 so:
 
 ```bash
-sudo apt-get install python-virtualenv virtualenvwrapper python-pip
+sudo apt install python3-virtualenv virtualenvwrapper python3-pip
 exec $SHELL
 ```
 
@@ -209,6 +209,7 @@ Thanks to all people who have contributed to this tutorial:
 * [Benny Wong](https://github.com/bdotdub)
 * [Bernardo Vale](https://github.com/bernardoVale)
 * [Chris Schmitz](https://github.com/ccschmitz)
+* [Cyril Mouchel](https://github.com/mouchh)
 * [dalton](https://github.com/dalton)
 * [Daniel Howard](https://github.com/dannyman)
 * [David Golden](https://github.com/dagolden)
@@ -220,7 +221,11 @@ Thanks to all people who have contributed to this tutorial:
 * [Jelly Robot](https://github.com/jellyjellyrobot)
 * [Justin Garrison](https://github.com/rothgar)
 * [Karlo](https://github.com/karlo57)
+* [lenowac](https://github.com/lenowac)
 * [Marchenko Alexandr](https://github.com/mac2000)
+* [Maxim Zaitsev](http://github.com/7aitsev)
+* [Michael B. Sumulong](http://github.com/MSumulong/)
+* [Mikhail Shavliuk](https://github.com/mshavliuk)
 * [mxxcon](https://github.com/mxxcon)
 * [Patrick Pelletier](https://github.com/skinp)
 * [Pierre-Gilles Levallois](https://github.com/Pilooz)
